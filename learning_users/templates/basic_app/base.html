@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>BASE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="navbar-brand"> <a href="{% url 'index' %}">INDEX</a> </li>
+              <li class="nav-link"> <a href="{% url 'basic_app:register' %}">register</a> </li>
+              <li class="nav-link"> <a href="{% url 'admin:index' %}">admin</a> </li>
+              {% if user.is_authenticated %}
+              <li class="nav-link"> <a href="{% url 'special' %}">Special</a> </li>
+              {% else %}
+              <li class="nav-link" > <a  class="nav-link disabled" href="{% url 'special' %}">Special</a> </li>
+              {% endif %}
+
+              {% if user.is_authenticated %}
+              <li class="nav-link"> <a href="{% url 'logout' %}">logout</a> </li>
+              {% else %}
+              <li class="nav-link"> <a href="{% url 'basic_app:user_login' %}">login</a> </li>
+              {% endif %}
+            </ul>
+
+
+            <form class="form-inline my-2 my-lg-0">
+               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+          </div>
+
+        </nav>
+        <div class="container">
+          {% block body_block %}
+
+          {% endblock %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>
